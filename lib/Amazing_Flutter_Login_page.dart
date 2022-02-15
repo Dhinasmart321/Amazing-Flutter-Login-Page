@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: LoginPage(),
-  ));
-}
-
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -16,8 +10,8 @@ class _LoginPageState extends State<LoginPage> {
   final _formkey = GlobalKey<FormState>();
 
   final Decoration _screendec = BoxDecoration(
-      border: Border.all(width: 4, color: Colors.green),
-      image: DecorationImage(
+      border: Border.all(width: 1.w, color: Colors.blue),
+      image: const DecorationImage(
           image: NetworkImage(
               'https://www.themebeta.com/media/cache/400x225/files/windows/images/201808/30/8e6cac645e8b873786b053dc845c2abe.jpeg'),
           fit: BoxFit.cover));
@@ -35,13 +29,16 @@ class _LoginPageState extends State<LoginPage> {
           decoration: _screendec,
           child: Column(
             children: [
+              SizedBox(
+                height: 5.h,
+              ),
               logocontainer(),
               SizedBox(height: 5.h),
               Form(
                 key: _formkey,
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 3),
-                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                  margin: EdgeInsets.symmetric(horizontal: 3.w),
+                  padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
                   height: 50.h,
                   width: 95.w,
                   decoration: BoxDecoration(
@@ -54,10 +51,9 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       usernamefield(),
                       SizedBox(
-                        height: 1,
+                        height: 1.h,
                       ),
                       passwordfield(),
-                      SizedBox(height: 1, width: 1),
                       showpasswordfield(),
                       loginbutton(),
                       Row(
@@ -65,10 +61,10 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           forgotpasswordbutton(),
                           Text(
-                            'dont have an account?',
+                            'Don\'t have an account?',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 17,
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.bold),
                           )
                         ],
@@ -91,13 +87,13 @@ class _LoginPageState extends State<LoginPage> {
         'REGISTER NOW',
         style: TextStyle(
           color: Colors.white,
-          fontSize: 15,
+          fontSize: 13.sp,
           fontWeight: FontWeight.bold,
         ),
       ),
       onPressed: () {},
       style: ElevatedButton.styleFrom(
-          fixedSize: Size(40.w, 4.h),
+          fixedSize: Size(40.w, 5.h),
           primary: Colors.red,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
@@ -107,10 +103,10 @@ class _LoginPageState extends State<LoginPage> {
   TextButton forgotpasswordbutton() {
     return TextButton(
       child: Text(
-        'FORGOT PASSWORD',
+        'Forgot Password',
         style: TextStyle(
           color: Colors.blue,
-          fontSize: 15,
+          fontSize: 13.sp,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -124,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
         'LOGIN',
         style: TextStyle(
           color: Colors.white,
-          fontSize: 15,
+          fontSize: 15.sp,
         ),
       ),
       onPressed: () => onLoginPressed(context),
@@ -139,16 +135,17 @@ class _LoginPageState extends State<LoginPage> {
 
   void onLoginPressed(BuildContext Context) {
     if (_formkey.currentState!.validate()) {
-      print('hi');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: Colors.black,
           content: Text(
             'LOGIN IS SUCCESSFULL',
             style: TextStyle(
-                color: Colors.pink, fontSize: 15, fontWeight: FontWeight.bold),
+                color: Colors.pink,
+                fontSize: 15.sp,
+                fontWeight: FontWeight.bold),
           ),
-          duration: Duration(seconds: 1),
+          duration: const Duration(seconds: 1),
           action: SnackBarAction(label: 'OK', onPressed: () {}),
         ),
       );
@@ -175,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
               });
             }),
         Text(
-          'show password',
+          'Show Password',
           style: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 15.sp, color: Colors.pink),
         )
@@ -185,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Container passwordfield() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 5),
       height: 8.h,
       width: 80.w,
       child: TextFormField(
@@ -202,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
           return null;
         },
         style: TextStyle(
-            color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+            color: Colors.white, fontSize: 15.sp, fontWeight: FontWeight.bold),
         decoration: InputDecoration(
             icon: Icon(
               Icons.lock,
@@ -210,8 +207,8 @@ class _LoginPageState extends State<LoginPage> {
               size: 25.sp,
             ),
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2),
-                borderRadius: BorderRadius.circular(10.sp)),
+                borderSide: BorderSide(color: Colors.white, width: 2.sp),
+                borderRadius: BorderRadius.circular(5.sp)),
             hintText: 'PASSWORD',
             hintStyle: TextStyle(
                 color: Colors.white,
@@ -225,12 +222,12 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       height: 8.h,
       width: 80.w,
-      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 5),
       child: TextFormField(
         controller: username,
         validator: (value) {
           if (value!.isEmpty) {
-            return 'enter your username';
+            return 'Enter your username';
           } else if (value.length >= 10) {
             return 'Name too long';
           } else if (value.length <= 5) {
@@ -239,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
           return null;
         },
         style: TextStyle(
-            color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+            color: Colors.white, fontSize: 15.sp, fontWeight: FontWeight.bold),
         decoration: InputDecoration(
           icon: Icon(
             Icons.person_rounded,
@@ -252,8 +249,10 @@ class _LoginPageState extends State<LoginPage> {
               fontWeight: FontWeight.bold,
               color: Colors.white),
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 2),
-              borderRadius: BorderRadius.circular(10)),
+              borderSide: BorderSide(color: Colors.white, width: 2.sp),
+              borderRadius: BorderRadius.circular(
+                5.sp,
+              )),
         ),
       ),
     );
@@ -261,28 +260,18 @@ class _LoginPageState extends State<LoginPage> {
 
   Container logocontainer() {
     return Container(
-        child: Column(
-      children: [
-        SizedBox(
-          height: 20,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 17.h,
-              width: 50.w,
-              decoration: BoxDecoration(
-                  border: Border.all(width: 2),
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          'https://render.fineartamerica.com/images/rendered/medium/print/8/5.5/break/images/artworkimages/medium/2/1-crystal-cave-bragi-kort.jpg'),
-                      fit: BoxFit.cover)),
-            ),
-          ],
-        )
-      ],
-    ));
+      height: 17.h,
+      width: 50.w,
+      decoration: BoxDecoration(
+          border: Border.all(
+            width: 1.sp,
+            color: Colors.blueAccent,
+          ),
+          borderRadius: BorderRadius.circular(5.sp),
+          image: const DecorationImage(
+              image: NetworkImage(
+                  'https://render.fineartamerica.com/images/rendered/medium/print/8/5.5/break/images/artworkimages/medium/2/1-crystal-cave-bragi-kort.jpg'),
+              fit: BoxFit.cover)),
+    );
   }
 }
